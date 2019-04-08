@@ -3,3 +3,15 @@
 #spring:
 #  main:
 #    banner-mode: off
+
+#spring:
+#  profiles:
+#    active: prod
+
+book:
+  author: wangyunfei
+  name: spring boot
+
+author:
+  name: wangyunfei
+  age: 32
