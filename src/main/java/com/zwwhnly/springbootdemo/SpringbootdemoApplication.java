@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @SpringBootApplication
-@EnableScheduling
+//@EnableScheduling
 public class SpringbootdemoApplication {
 
     @Value("${book.author}")
@@ -21,10 +21,10 @@ public class SpringbootdemoApplication {
     @Autowired
     private AuthorSettings authorSettings;
 
-    @RequestMapping
+    /*@RequestMapping
     public String hello() {
         return "Hello Spring Boot!";
-    }
+    }*/
 
     @RequestMapping("/")
     public String index() {
