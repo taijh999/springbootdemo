@@ -6,38 +6,36 @@ import com.zwwhnly.springbootdemo.jdbc.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/data/jdbc/book")
+@RequestMapping(value = "/jdbc/book")
 public class BookController {
     @Autowired
     private BookService bookService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    public Map<String, Object> getBookList(HttpServletRequest request) {
+    @RequestMapping(value = "getBookList", method = RequestMethod.GET)
+    public Map<String, Object> getBookList() {
         List<Book> bookList = this.bookService.findBookList();
-        Map<String, Object> param = new HashMap<String, Object>();
+        Map<String, Object> param = new HashMap<>();
         param.put("total", bookList.size());
         param.put("rows", bookList);
         return param;
     }
 
-    @RequestMapping(value = "/{userId:\\d+}", method = RequestMethod.GET)
-    public Book getBook(@PathVariable Integer userId, HttpServletRequest request) {
-        Book author = this.bookService.findBook(userId);
-        if (author == null) {
+    @RequestMapping(value = "/getBook/{bookId:\\d+}", method = RequestMethod.GET)
+    public Book getBook(@PathVariable Integer bookId) {
+        Book book = this.bookService.findBook(bookId);
+        if (book == null) {
             throw new RuntimeException("查询错误");
         }
-        return author;
+        return book;
     }
 
-    @RequestMapping(method = RequestMethod.POST)
+    @RequestMapping(value = "add", method = RequestMethod.POST)
     public void add(@RequestBody JSONObject jsonObject) {
         String bookName = jsonObject.getString("bookName");
         String bookAuthor = jsonObject.getString("bookAuthor");
@@ -57,9 +55,9 @@ public class BookController {
         }
     }
 
-    @RequestMapping(value = "/{userId:\\d+}", method = RequestMethod.PUT)
-    public void update(@PathVariable Integer userId, @RequestBody JSONObject jsonObject) {
-        Book book = this.bookService.findBook(userId);
+    @RequestMapping(value = "/update/{bookId:\\d+}", method = RequestMethod.PUT)
+    public void update(@PathVariable Integer bookId, @RequestBody JSONObject jsonObject) {
+        Book book = this.bookService.findBook(bookId);
         String bookName = jsonObject.getString("bookName");
         String bookAuthor = jsonObject.getString("bookAuthor");
         String purchaseDate = jsonObject.getString("purchaseDate");
@@ -75,10 +73,10 @@ public class BookController {
         }
     }
 
-    @RequestMapping(value = "/{userId:\\d+}", method = RequestMethod.DELETE)
-    public void delete(@PathVariable Integer userId) {
+    @RequestMapping(value = "/delete/{bookId:\\d+}", method = RequestMethod.DELETE)
+    public void delete(@PathVariable Integer bookId) {
         try {
-            this.bookService.delete(userId);
+            this.bookService.delete(bookId);
         } catch (Exception e) {
             throw new RuntimeException("删除错误");
         }

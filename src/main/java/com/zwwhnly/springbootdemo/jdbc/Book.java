@@ -1,11 +1,14 @@
 package com.zwwhnly.springbootdemo.jdbc;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Book {
     private Integer bookId;
     private String bookName;
     private String bookAuthor;
+    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Date purchaseDate;
 
     public Integer getBookId() {

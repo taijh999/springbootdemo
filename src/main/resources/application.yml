@@ -15,13 +15,13 @@ book:
 author:
   name: wangyunfei
   age: 32
+
 spring:
-  jackson:
-    time-zone: GMT+8,
-    date-format: yyyy-MM-dd HH:mm:ss
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/springbootdemo_db
-#    username: root
-#    password:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/springbootdemo_db
+    username: root
+    password:
+#  jackson:
+#      time-zone: GMT+8,
+#      date-format: yyyy-MM-dd HH:mm:ss
