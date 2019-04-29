@@ -35,8 +35,8 @@ public class HelloController {
         return books;
     }
 
-    @RequestMapping(value = "/getBook/{bookId}", method = RequestMethod.GET)
-    public Book getBook(@PathVariable("bookId") Integer bookIndex) {
+    @RequestMapping(value = "/getBook/{bookId:\\d+}", method = RequestMethod.GET)
+    public Book getBook(@PathVariable Integer bookId) {
         Book book = null;
         List<Book> books = new ArrayList<>();
         try {
@@ -46,7 +46,7 @@ public class HelloController {
             books.add(book1);
             books.add(book2);
 
-            book = books.get(bookIndex - 1);
+            book = books.get(bookId - 1);
         } catch (ParseException e) {
             e.printStackTrace();
         }
