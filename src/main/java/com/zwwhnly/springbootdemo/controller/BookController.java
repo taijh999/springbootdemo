@@ -30,7 +30,7 @@ public class BookController {
     public Book getBook(@PathVariable Integer bookId) {
         Book book = this.bookService.findBook(bookId);
         if (book == null) {
-            throw new RuntimeException("查询错误");
+            throw new RuntimeException("查询错误aaaaaaa");
         }
         return book;
     }
